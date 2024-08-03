@@ -13,10 +13,12 @@ public:
     DynFibonacci(int capacity): cache(new size_t[capacity]{0,1}), cached(2) {}
 
     // TODO: 实现复制构造器
-    DynFibonacci(DynFibonacci const &others)
-        :cache(new size_t[others.cached]), cached(others.cached) {
-            std::memcpy(cache, others.cache, cached * sizeof(size_t));
-        };
+    DynFibonacci(DynFibonacci const &others){
+        cache = new size_t[others.cached];
+        for(int i=0;i<others.cached;i++)
+            cache[i] = others.cache[i];
+        cached = others.cached;
+    };
 
     // TODO: 实现析构器，释放缓存空间
     ~DynFibonacci(){
