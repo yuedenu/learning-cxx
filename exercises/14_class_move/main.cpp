@@ -15,23 +15,20 @@ class DynFibonacci {
 
 public:
     // TODO: 实现动态设置容量的构造器
-    DynFibonacci(int capacity): cache(new size_t[capacity]{0,1}), cached(2) {};
+    DynFibonacci(int capacity): cache(new size_t[capacity]{0,1}), cached(2) {}
 
     // TODO: 实现移动构造器
-    DynFibonacci(DynFibonacci &&other) noexcept 
-        : cache(std::exchange(other.cache,nullptr)),
-          cached(std::exchange(other.cached,0)) {};
+    DynFibonacci(DynFibonacci &&other) noexcept : cache(std::exchange(other.cache, nullptr)), cached(std::exchange(other.cached, 0)){}
 
     // TODO: 实现移动赋值
     // NOTICE: ⚠ 注意移动到自身问题 ⚠
     DynFibonacci &operator=(DynFibonacci &&other) noexcept {
-        if(this != &other){
-            delete[] this ->cache;
-            cache = std::exchange(other.cache,nullptr);
-            cached = std::exchange(other.cached,0);
-        }
+        if (this == &other)
+            return *this;
+        cache = std::exchange(other.cache, nullptr);
+        cached = std::exchange(other.cached, 0);
         return *this;
-    };
+    }
 
     // TODO: 实现析构器，释放缓存空间
     ~DynFibonacci(){
