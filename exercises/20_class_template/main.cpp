@@ -1,5 +1,5 @@
 ﻿#include "../exercise.h"
-
+#include <cstring>
 // READ: 类模板 <https://zh.cppreference.com/w/cpp/language/class_template>
 
 template<class T>
@@ -35,16 +35,16 @@ struct Tensor4D {
         auto dst = this->data;
         auto src = others.data;
         T *mask[4]{src};
-        for(int i=0u;i<shape[0];i++){
+        for(auto i=0u;i<shape[0];i++){
             if(this->shape[0]!=others.shape[0]) src = mask[0];
             mask[1] = src;
-            for(int j=0u;j<shape[1];j++){
+            for(auto j=0u;j<shape[1];j++){
                 if(this->shape[1]!=others.shape[1]) src = mask[1];
                 mask[2] = src;
-                for(int k=0u;k<shape[2];k++){
+                for(auto k=0u;k<shape[2];k++){
                     if(this->shape[2]!=others.shape[2]) src = mask[2];
                     mask[3] = src;
-                    for(int l=0u;l<shape[3];l++){
+                    for(auto l=0u;l<shape[3];l++){
                         if(this->shape[3]!=others.shape[3]) src = mask[3];
                         *dst++ += *src++;
                     }
